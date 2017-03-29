@@ -1,9 +1,0 @@
-# NodeJS app. Deploys if needed, watches src dir for transpiling and reloading.
-server:
-  build: ./SysProg/server/
-  ports:
-    - "3022:22"
-    - "7777:7777"
-    - "9999:9999"
-  volumes:
-    - ./SysProg/server:/root/SysProg/server

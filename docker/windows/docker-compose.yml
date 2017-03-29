@@ -1,0 +1,25 @@
+version: '2.0'
+
+services:
+  # Server application
+  server:
+    build:
+      context: ../../SysProg/server/
+      dockerfile: Dockerfile-linux
+    ports:
+      - "3022:22"
+      - "4444:4444"
+      - "5555:5555"
+    volumes:
+      - ../../SysProg/server/src:/root/SysProg/src
+
+  client-1:
+      build:
+        context: ../../SysProg/client/
+        dockerfile: Dockerfile-linux
+      ports:
+        - "3023:22"
+        - "6666:6666"
+        - "7777:7777"
+      volumes:
+        - ../../SysProg/client/src:/root/SysProg/src
