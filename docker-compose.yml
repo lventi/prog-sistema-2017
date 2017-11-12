@@ -1,0 +1,57 @@
+version: "2.1"
+services:
+  client-linux:
+    build:
+      context: .
+#      dockerfile: Dockerfile-linux
+      args:
+        - arg=arg
+    ports:
+      - "8888:8888"
+    environment:
+      - PLATFORM=LINUX
+    volumes:
+      - ./ransomware/client/src:/root/ransomware-client
+      - ./dist/client/linux:/home/ransomware-client/dist
+    entrypoint: /bin/sh -c "cd /home/ransomware-client && source dist/main.out"
+
+  client-windows:
+    build:
+      context: .
+#      dockerfile: Dockerfile-linux
+      args:
+        - arg=arg
+    ports:
+      - "8889:8888"
+    environment:
+      - PLATFORM=LINUX
+    volumes:
+      - ./ransomware/client:/home/ransomware-client
+      - ./dist/client/windows:/home/ransomware-client/dist
+    entrypoint: /bin/sh -c "cd /home/ransomware-client && wine dist/wget.exe https://github.com/moby/moby/issues/1295"
+
+  server-linux:
+      build:
+        context: .
+#        dockerfile: Dockerfile-linux
+        args:
+          - arg=arg
+      ports:
+            - "8890:8888"
+      environment:
+        - PLATFORM=LINUX
+      volumes:
+        - ./ransomware/server/src:/root/ransomware-server
+
+  server-windows:
+    build:
+      context: .
+#      dockerfile: Dockerfile-windows
+      args:
+        - arg=arg
+    ports:
+        - "8891:8888"
+    environment:
+      - PLATFORM=WINDOWS
+    volumes:
+      - ./ransomware/server/src:/root/ransomware-server
